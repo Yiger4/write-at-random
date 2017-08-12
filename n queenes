@@ -1,0 +1,42 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Welcome {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i <= n - 1; i++) {
+            a[i] = i;
+        }
+        boolean b = true;
+        while (b) {
+            b = false;
+            for (int e = n - 1; e > 0; e--) {
+                int j = (int) (Math.random() * (e + 1));
+                int temp = a[e];
+                a[e] = a[j];
+                a[j] = temp;
+            }
+            for (int i = 0; i <= n - 2; i++) {
+                if (a[i] - a[i + 1] == 1 || a[i] - a[i + 1] == -1) {
+                    b = true;
+                }
+            }
+
+        }
+        for (int i = 0; i <= n - 1; i++) {
+            for (int j = 0; j <= n - 1; j++) {
+                if (j == a[i]) {
+                    System.out.print("|Q");
+                } else {
+                    System.out.print("| ");
+                }
+            }
+            System.out.println("|");
+        }
+
+    }
+}
