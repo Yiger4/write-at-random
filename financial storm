@@ -1,0 +1,49 @@
+package demo;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int n = input.nextInt();
+		int limit = input.nextInt();
+		double[][] info = new double[n][2];
+		double[][] borrowers = new double[n][n];
+		int j = -1;
+		for (int i = 0; i <= n - 1; i++) {
+			info[i][0] = input.nextDouble();
+			info[i][1] = input.nextDouble();
+			if (info[i][1] == 1) {
+				j = input.nextInt();
+				borrowers[i][j] = input.nextDouble();
+			} else {
+				j = input.nextInt();
+				borrowers[i][j] = input.nextDouble();
+				j = input.nextInt();
+				borrowers[i][j] = input.nextDouble();
+			}
+		}
+		double t = 0;
+		for (int w = 0; w <= n - 1; w++) {
+			for (int i = 0; i <= n - 1; i++) {
+				t = info[i][0];
+				for (j = 0; j <= n - 1; j++) {
+					t += borrowers[i][j];
+				}
+				if (t < limit) {
+					info[i][0] = 0;
+					for (j = 0; j <= n - 1; j++) {
+						borrowers[j][i] = 0;
+					}
+				}
+			}
+		}
+		System.out.print("Unsafe banks are ");
+		for (int i = 0; i <= n - 1; i++) {
+			if (info[i][0] == 0)
+				System.out.print(i + " ");
+		}
+	}
+}
